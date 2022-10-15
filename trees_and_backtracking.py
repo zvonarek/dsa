@@ -118,3 +118,123 @@ class Solution:
         root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
         root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
         return root
+
+#Breadth First Search (BFS), T: O(n), M:
+from collections import deque
+from operator import le
+def bfs(root):
+    queue= deque()
+
+    if root: queue.append(root)
+    level = 0
+    while len(queue) >0:
+        print("level: ", level)
+        for i in range(len(queue)):
+            curr = queue.popleft()
+            print(curr.val)
+            if curr.left: queue.append(curr.left)
+            if curr.right: queue.append(curr.right)
+        level +=1
+#102 Binary Tree Level Order Traversal, T: O(n)
+class Solution:
+    from collections import deque
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        q = collections.deque()
+        q.append(root)
+
+        while q:
+            qLen = len(q)
+            level = []
+            for i in range(qLen):
+                node = q.popleft()
+                if node:
+                    level.append(node.val)
+                    q.append(node.left)
+                    q.append(node.right)
+                if level:
+                    res.append(level)
+        return res
+#199 Binary Tree Right Side View
+#use a queue, add root node and add rightmost to res array
+#add right/left child and then remove the right value after adding its children
+#add left to the res
+def rightSideView(self, root: TreeNode) -> List[int]:
+    res = []
+    q = collections.queue([root])
+    while q:
+        rightSide = None
+        qLen = len(q)
+
+        for i in range(qLen):
+            node = q.popleft()
+            if node: 
+                rightSide = node
+                q.append(node.left)
+                q.append(node.right)
+        if rightSide: res.append(rightSide.val)
+    return res
+
+#Sets/Maps, implemented with BFS, like Queues are made w LL, and Stacks are made w/ arrays
+from sortedcontainers import SortedDict
+treeMap = SortedDict({'c':1, 'a':1, 'b':2})
+
+#backtracking, T: O(n) this is a brute force alg
+def canReachLevel(root):
+    if not root or root.val == 0: return False
+    if not root.left and not root.right: return True
+    if canReachLevel(root.left): return True
+    if canReachLevel(root.right): return True
+    return False
+#determine if a path exists from the root of the tree to a leaf node, cannot conatin zeros
+def leafPath(root, path):
+    if not root and root.val == 0: return False
+    path.append(root.val)
+    if not root.left and not root.right: return True
+    if leafPath(root.left, path): return True
+    if leafPath(root.right, path): return True
+    path.pop()
+    return False
+#112 Path Sum
+#need to go through all the paths and see if it ends up totalling target val
+#inorder DFS problem while maintaining sum T: O(n), M: O(n), O(log n) if balanched
+def Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        def dfs(node, curSum):
+            if not node: return False
+            curSum += node.val
+            if not node.left and not node.right: return curSum == targetSum
+            return (dfs(node.left, curSum) or dfs(node.right,curSum))
+        return dfs(root,0)
+#78 Subsets 
+def subSets(self, nums: List[int]) -> List[List[int]]:
+    res = []
+    subset = []
+    def dfs(i):
+        if i >= len(nums):
+            res.append(subset.copy())
+            return
+        #include nums[i]
+        subset.append(nums[i])
+        dfs(i+1) #left branch
+        #not to include nums[i]
+        subset.pop()
+        dfs(i+1)
+    dfs(0)
+    return res
+#39 Combination Sum, T: O(2^t)
+def combinationSum(self, candidates: List[int], target:int) -> List[List[int]]:
+    res = []
+
+    def dfs(i, cur, total):
+        if total == target: 
+            res.append(cur.copy())
+            return
+        if i >= len(candidates) or total > target: return
+        candidates[i]
+        cur.append(candidates[i])
+        dfs(i, cur, total + candidates[i])
+        cur.pop()
+        dfs(i+1,cur,total)
+    dfs(0,[],0)
+    return res
