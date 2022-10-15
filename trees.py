@@ -99,7 +99,6 @@ class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         stack = []
         curr = root
-
         while stack or curr:
             while curr:
                 stack.append(curr)
@@ -109,3 +108,13 @@ class Solution:
             if k == 0:
                 return curr.val
             curr = curr.right
+#105 Contruct Binary Tree from Preorder and Inorder Travesal
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder or not inorder:
+            return None
+        root = TreeNode(preorder[0])
+        mid = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
+        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+        return root
