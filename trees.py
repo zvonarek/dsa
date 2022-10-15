@@ -1,11 +1,11 @@
 #binary trees, can remove/insert in O(log n) so long as it is roughly balanced
 #BST: recursive, if balanced tree: heights of sub trees ~ each other
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 def search(root, target): #T: O(log n)
     if not root: return False
     if target > root.val: return search(root.right, target)
@@ -95,3 +95,17 @@ class Solution:
             res.append(cur.val)
             cur = cur.right
 #230 Kth Smallest Element in a BST
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        stack = []
+        curr = root
+
+        while stack or curr:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            k -= 1
+            if k == 0:
+                return curr.val
+            curr = curr.right
