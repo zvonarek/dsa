@@ -8,9 +8,6 @@
     #head.next = head.next.next
 
 #206 Reverse a linked list:
-from turtle import heading
-
-
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val

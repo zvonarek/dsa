@@ -198,14 +198,13 @@ def leafPath(root, path):
 #112 Path Sum
 #need to go through all the paths and see if it ends up totalling target val
 #inorder DFS problem while maintaining sum T: O(n), M: O(n), O(log n) if balanched
-def Solution:
-    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
-        def dfs(node, curSum):
-            if not node: return False
-            curSum += node.val
-            if not node.left and not node.right: return curSum == targetSum
-            return (dfs(node.left, curSum) or dfs(node.right,curSum))
-        return dfs(root,0)
+def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+    def dfs(node, curSum):
+        if not node: return False
+        curSum += node.val
+        if not node.left and not node.right: return curSum == targetSum
+        return (dfs(node.left, curSum) or dfs(node.right,curSum))
+    return dfs(root,0)
 #78 Subsets 
 def subSets(self, nums: List[int]) -> List[List[int]]:
     res = []

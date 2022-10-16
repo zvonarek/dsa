@@ -1,10 +1,6 @@
 #sorting an array
 #insertion sort, acsending order
 #break into sub problems, solving iteratively, stable alg., T: O(n^2)
-from array import array
-from re import L, S
-
-
 def sortArray(self, arr: int) -> int:
     for i in range(1,len(arr)):
         j = i -1
