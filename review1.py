@@ -1,4 +1,5 @@
-#Classes:
+import math
+from collections import deque
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -8,10 +9,8 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-import math
 ##########################################################################################
 ##########################################################################################
-
 #LC 206 Reverse a Linked List
 def reverseList(self, head:ListNode) -> ListNode: #T O(n), M O(1)
     prev, curr = None, head
@@ -166,10 +165,13 @@ def minEatingSpeed(self, piles: List[int], h: int) -> int:
             else: l = k + 1
 #LC 780 Search in a Binary Search Tree
 def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
-        if root is None or root.val == val: # If end is reached or a node with a value of target is found found.
+        if root is None or root.val == val:
+            # If end is reached or a node with a value of target is found found.
             return root # Return that node.
-		# If target > current nodes value search in left side of node else search rightwards.
-        return self.searchBST(root.left,val) if root.val > val else self.searchBST(root.right,val) 
+		# If target > current nodes value search in left side of node 
+        # else search rightwards.
+        if root.val > val: return self.searchBST(root.left,val)
+        else: return self.searchBST(root.right,val) 
 #LC 94 Binary Tree Inorder Traversal
 def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         res = []
