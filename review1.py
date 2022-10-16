@@ -20,7 +20,7 @@ def reverseList(self, head:ListNode) -> ListNode: #T O(n), M O(1)
         prev = curr
         curr = nxt
     return prev
-def reverseList_recursive(self, head:ListNode) -> ListNode: #T O(n), M O(n)
+def reverseList_recursive(self, head:ListNode) -> ListNode: 
     if not head:
         return None
     newHead = head
@@ -67,7 +67,7 @@ def climbing(self, n: int) -> int:
         two = temp
     return one
 #LC 21 Merge K Sorted Linked Lists
-def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+def mergeKLists(self, lists: list[ListNode]) -> ListNode:
         if not lists or len(lists) == 0:
             return None
         while len(lists) > 1:
@@ -79,10 +79,10 @@ def mergeKLists(self, lists: List[ListNode]) -> ListNode:
             lists = mergedLists
         return lists[0]
 #LC 215 Kth Largest Element in an Array
-def kLargest_cheap(self, nums: List[int], k:int) -> int:
+def kLargest_cheap(self, nums: list[int], k:int) -> int:
     nums.sort()
     return nums[len(nums)-k]
-def kLargest(self, nums: List[int], k:int) -> int:
+def kLargest(self, nums: list[int], k:int) -> int:
     k = len(nums) - k
     def quickSelect(l,r):
         pivot, p = nums[r], l
@@ -96,7 +96,7 @@ def kLargest(self, nums: List[int], k:int) -> int:
         else: return nums[p]
     return quickSelect(0,len(nums)-1)
 #LC 75 Sort Colors
-def sortColors(self, nums: List[int]) -> None:
+def sortColors(self, nums: list[int]) -> None:
     l, r = 0, len(nums) - 1
     i = 0
     def swap(i,j):
@@ -113,7 +113,7 @@ def sortColors(self, nums: List[int]) -> None:
             i-=1
         i +=1
 #LC 704 Binary Search
-def search(self, nums: List[int], target: int) -> int:
+def search(self, nums: list[int], target: int) -> int:
     l, r = 0, len(nums) - 1
     while l <= r:
         m = l + ((r - l)//2) 
@@ -122,7 +122,7 @@ def search(self, nums: List[int], target: int) -> int:
         else: return m
     return -1
 #LC 74 Search a 2D Matrix
-def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+def searchMatrix(self, matrix: list[list[int]], target: int) -> bool:
         ROWS, COLS = len(matrix), len(matrix[0])
         top, bot = 0, ROWS-1
         while top <= bot:
@@ -151,7 +151,7 @@ def guessNumber(self, n: int) -> int:
             if res < 0: r = m - 1
             else: return m
 #LC 875 Koko Eating Bananas
-def minEatingSpeed(self, piles: List[int], h: int) -> int:
+def minEatingSpeed(self, piles: list[int], h: int) -> int:
         l,r = 1, max(piles)
         res =r 
         while l<=r: 
@@ -173,7 +173,7 @@ def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         if root.val > val: return self.searchBST(root.left,val)
         else: return self.searchBST(root.right,val) 
 #LC 94 Binary Tree Inorder Traversal
-def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+def inorderTraversal(self, root: Optional[TreeNode]) -> list[int]:
         res = []
         def inorder(root):
             if not root: return
@@ -181,7 +181,7 @@ def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
             res.append(root.val)
             inorder(root.right)
         inorder(root)
-def inorderTraversal_iterative(self, root: Optional[TreeNode]) -> List[int]:
+def inorderTraversal_iterative(self, root: Optional[TreeNode]) -> list[int]:
     res = []
     stack = []
     cur = root
@@ -206,7 +206,7 @@ def kthSmallest(self, root: TreeNode, k: int) -> int:
                 return curr.val
             curr = curr.right
 #LC 105 Construct Binary Tree from Preorder and Inorder Traversal Arrays
-def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+def buildTree(self, preorder: list[int], inorder: list[int]) -> TreeNode:
         if not preorder or not inorder:
             return None
         root = TreeNode(preorder[0])
@@ -223,7 +223,7 @@ def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         return (dfs(node.left, curSum) or dfs(node.right,curSum))
     return dfs(root,0)
 #LC 78 Subsets 
-def subSets(self, nums: List[int]) -> List[List[int]]:
+def subSets(self, nums: list[int]) -> list[list[int]]:
     res = []
     subset = []
     def dfs(i):
@@ -237,7 +237,7 @@ def subSets(self, nums: List[int]) -> List[List[int]]:
     dfs(0)
     return res
 #LC 39 Combination Sum
-def combinationSum(self, candidates: List[int], target:int) -> List[List[int]]:
+def combinationSum(self, candidates: List[int], target:int) -> list[list[int]]:
     res = []
     def dfs(i, cur, total):
         if total == target: 
@@ -252,9 +252,9 @@ def combinationSum(self, candidates: List[int], target:int) -> List[List[int]]:
     dfs(0,[],0)
     return res
 #LC 199 Binary Tree Right Side View
-def rightSideView(self, root: TreeNode) -> List[int]:
+def rightSideView(self, root: TreeNode) -> list[int]:
     res = []
-    q = collections.queue([root])
+    q = queue([root])
     while q:
         rightSide = None
         qLen = len(q)
@@ -268,11 +268,10 @@ def rightSideView(self, root: TreeNode) -> List[int]:
         if rightSide: res.append(rightSide.val)
     return res
 #LC 103 Binary Tree Level Order Traversal
-def levelOrder(self, root: TreeNode) -> List[List[int]]:
+def levelOrder(self, root: TreeNode) -> list[list[int]]:
         res = []
-        q = collections.deque()
+        q = deque()
         q.append(root)
-
         while q:
             qLen = len(q)
             level = []
