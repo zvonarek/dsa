@@ -74,4 +74,28 @@ def dp(rows, cols):
         for c in range(cols - 2, -1, -1):
             curRow[c] = curRow[c + 1] + prevRow[c]
         prevRow = curRow
-    return prevRow[0] 
+    return prevRow[0]
+
+#LC 62 Unique Paths
+def uniquePaths(self, m: int, n: int) -> int:
+    row = [1] * n
+
+    for i in range(m - 1):
+        newRow = [1] * n
+        for j in range(n - 2, -1, -1):
+            newRow[j] = newRow[j + 1] + row[j]
+        row = newRow
+    return row[0]
+
+#LC 1143 Longest Common Subsequence
+def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        dp = [[0 for j in range(len(text2) + 1)] for i in range(len(text1) + 1)]
+
+        for i in range(len(text1) - 1, -1, -1):
+            for j in range(len(text2) - 1, -1, -1):
+                if text1[i] == text2[j]:
+                    dp[i][j] = 1 + dp[i + 1][j + 1]
+                else:
+                    dp[i][j] = max(dp[i][j + 1], dp[i + 1][j])
+
+        return dp[0][0]
